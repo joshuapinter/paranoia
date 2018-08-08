@@ -110,7 +110,7 @@ module Paranoia
         if within_recovery_window?(recovery_window_range) && ((noop_if_frozen && !@attributes.frozen?) || !noop_if_frozen)
           @_disable_counter_cache = !paranoia_destroyed?
           write_attribute paranoia_column, paranoia_sentinel_value
-          update_columns(paranoia_restore_attributes)
+          update_attributes(paranoia_restore_attributes)
           each_counter_cached_associations do |association|
             if send(association.reflection.name)
               association.increment_counters

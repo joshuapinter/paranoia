@@ -109,8 +109,7 @@ module Paranoia
         noop_if_frozen = ActiveRecord.version < Gem::Version.new("4.1")
         if (noop_if_frozen && !@attributes.frozen?) || !noop_if_frozen
           write_attribute paranoia_column, paranoia_sentinel_value
-          update_columns(paranoia_restore_attributes)
-          touch
+          update_attributes(paranoia_restore_attributes)
         end
         restore_associated_records if opts[:recursive]
       end

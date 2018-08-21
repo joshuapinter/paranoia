@@ -93,6 +93,7 @@ module Paranoia
       # callbacks can be run
       add_to_transaction
       update_columns(paranoia_destroy_attributes)
+      touch
     elsif !frozen?
       assign_attributes(paranoia_destroy_attributes)
     end

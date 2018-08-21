@@ -95,6 +95,7 @@ module Paranoia
       # callbacks can be run
       add_to_transaction unless self.class.connection.current_transaction.closed?
       update_columns(paranoia_destroy_attributes)
+      touch
     elsif !frozen?
       assign_attributes(paranoia_destroy_attributes)
     end

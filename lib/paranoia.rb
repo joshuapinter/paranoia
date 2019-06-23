@@ -40,6 +40,11 @@ module Paranoia
     end
     alias_method :deleted, :only_deleted
 
+    def deleted_between( start_time, end_time )
+      quoted_paranoia_column = connection.quote_column_name(paranoia_column)
+      with_deleted.where("#{quoted_paranoia_column} BETWEEN :start_time AND :end_time", start_time: start_time, end_time: end_time)
+    end
+
     def restore(id_or_ids, opts = {})
       ids = Array(id_or_ids).flatten
       any_object_instead_of_id = ids.any? { |id| ActiveRecord::Base === id }

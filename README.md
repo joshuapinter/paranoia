@@ -151,6 +151,12 @@ If you want to find only the deleted records:
 Client.only_deleted
 ```
 
+If you want to find the deleted records between certain dates:
+
+``` ruby
+Client.deleted_between(Time.now - 1.month, Time.now)
+```
+
 If you want to check if a record is soft-deleted:
 
 ``` ruby

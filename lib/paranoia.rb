@@ -41,8 +41,8 @@ module Paranoia
     alias_method :deleted, :only_deleted
 
     def deleted_between( start_time, end_time )
-      quoted_paranoia_column = connection.quote_column_name(paranoia_column)
-      with_deleted.where("#{quoted_paranoia_column} BETWEEN :start_time AND :end_time", start_time: start_time, end_time: end_time)
+      end_time = end_time.end_of_day if end_time.is_a?( Date )
+      with_deleted.where( paranoia_column => ( start_time..end_time ) )
     end
 
     def restore(id_or_ids, opts = {})
